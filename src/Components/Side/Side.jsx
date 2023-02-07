@@ -13,12 +13,30 @@ import {BsThreeDots ,BsFillBookmarkFill} from "react-icons/bs";
   FaRegHeart,
 } from "react-icons/fa";
 import { FiSearch, FiSun } from "react-icons/fi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function Side() {
   const [add, setadd] = useState("");
   const [dark, setdark] = useState("");
+  const[postdata,setpostdata]=useState([])
 
+ 
+
+
+  useEffect(() => {
+    axios.get('http://localhost:5050/post').then((res)=>{
+    
+    console.table(res.data)
+    setpostdata(res.data)
+    
+    
+  })
+  },[]);
+
+
+
+ 
   return (
     <>
       <div className={`mode ${dark}`}>
@@ -146,24 +164,23 @@ function Side() {
 {/* post start */}
 
 
+        {postdata.map((item,index)=>(
 
 
-
-
-          <div className="post">
+  <div className="post" key={index}>
 
                      <div className="head">
 
 
                          <img src="https://powerpackelements.com/wp-content/uploads/2017/11/Team-memeber-01.png" alt="" />
-                         <p className="name">Name</p>
+                         <p className="name">anis520</p>
                          <p   
                           className="icons"><BsThreeDots></BsThreeDots></p>
 
                      </div>
                      <div className="bodys">
 
-                         <img src="https://freedesignfile.com/upload/2020/10/Islamic-background-design-mosque-window-with-light-shadow-vector.jpg" alt="" />
+                         <img src={item.photo} alt="" />
 
                      </div>
                      <div className="footer">
@@ -176,7 +193,7 @@ function Side() {
                           </div>
 
                            <div className="ti">
-                            <p>Hello world</p>
+                            <p>{item.title}</p>
                            </div>
                            <div className="co">
                             <input type="text" placeholder="Add a comment..." />
@@ -187,83 +204,15 @@ function Side() {
 
 
           </div>
+
+
+        ))}
+
+
+
+        
   
-          <div className="post">
-
-                     <div className="head">
-
-
-                         <img src="https://powerpackelements.com/wp-content/uploads/2017/11/Team-memeber-01.png" alt="" />
-                         <p className="name">Name</p>
-                         <p   
-                          className="icons"><BsThreeDots></BsThreeDots></p>
-
-                     </div>
-                     <div className="bodys">
-
-                         <img src="https://freedesignfile.com/upload/2020/10/Islamic-background-design-mosque-window-with-light-shadow-vector.jpg" alt="" />
-
-                     </div>
-                     <div className="footer">
-                          
-                          <div className="re">
-                          <FaRegHeart></FaRegHeart>
-                          <FaFacebookMessenger></FaFacebookMessenger>
-                          <FiSend></FiSend>
-                          <BsFillBookmarkFill className="last"></BsFillBookmarkFill>
-                          </div>
-
-                           <div className="ti">
-                            <p>Hello world</p>
-                           </div>
-                           <div className="co">
-                            <input type="text" placeholder="Add a comment..." />
-                           </div>
-                                 
-                     </div>
-
-
-
-          </div>
-  
-          <div className="post">
-
-                     <div className="head">
-
-
-                         <img src="https://powerpackelements.com/wp-content/uploads/2017/11/Team-memeber-01.png" alt="" />
-                         <p className="name">Name</p>
-                         <p   
-                          className="icons"><BsThreeDots></BsThreeDots></p>
-
-                     </div>
-                     <div className="bodys">
-
-                         <img src="https://freedesignfile.com/upload/2020/10/Islamic-background-design-mosque-window-with-light-shadow-vector.jpg" alt="" />
-
-                     </div>
-                     <div className="footer">
-                          
-                          <div className="re">
-                          <FaRegHeart></FaRegHeart>
-                          <FaFacebookMessenger></FaFacebookMessenger>
-                          <FiSend></FiSend>
-                          <BsFillBookmarkFill className="last"></BsFillBookmarkFill>
-                          </div>
-
-                           <div className="ti">
-                            <p>Hello world</p>
-                           </div>
-                           <div className="co">
-                            <input type="text" placeholder="Add a comment..." />
-                           </div>
-                                 
-                     </div>
-
-
-
-          </div>
-  
+ 
  
           
 
