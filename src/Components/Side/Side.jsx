@@ -20,22 +20,71 @@ function Side() {
   const [add, setadd] = useState("");
   const [dark, setdark] = useState("");
   const[postdata,setpostdata]=useState([])
+  const[input,setinput]=useState({
+
+       title:'',
+       photo:''
+
+
+
+
+  })
 
  
 
 
   useEffect(() => {
-    axios.get('http://localhost:5050/post').then((res)=>{
+    axios.get('http://localhost:5050/post?_sort=id&_order=desc').then((res)=>{
     
     console.table(res.data)
     setpostdata(res.data)
     
     
   })
-  },[]);
+  },[add]);
+
+const handleinput=(e)=>{
+
+
+    setinput((prevstate)=>({
+
+         ...prevstate,
+           
+        [e.target.name]:e.target.value
+        
 
 
 
+    }))
+
+
+}
+
+const handlesubmit=(e)=>{
+
+  e.preventDefault() 
+  axios.post('http://localhost:5050/post',input).then(res=>{
+
+
+    postdata(res.data)
+
+
+  })
+  setadd('')
+  setinput({
+    title:'',
+    photo:''
+
+    
+  })
+
+
+
+
+
+
+
+}
  
   return (
     <>
@@ -46,22 +95,24 @@ function Side() {
               <p>Create new post</p>
               <hr />
 
+                <form action="" onSubmit={handlesubmit}>
+                  
               <div>
-                <label htmlFor="img">Photo link</label>
-                <input type="text" id="img" />
+
+                <label  htmlFor="img">Photo link</label>
+                <input onChange={handleinput}  name="photo" value={input.photo} type="text" id="img" />
               </div>
               <div>
                 <label htmlFor="title">Title your</label>
-                <input type="text" id="title" />
+                <input name="title" onChange={handleinput} value={input.title} type="text" id="title" />
               </div>
               <FaRegImage className="logoimg"></FaRegImage>
-              <button
-                onClick={(e) => {
-                  setadd("");
-                }}
+              <button type="submit"
+                 
               >
                 Upload
               </button>
+                  </form>    
             </div>
 
             <MdClose
@@ -167,7 +218,7 @@ function Side() {
         {postdata.map((item,index)=>(
 
 
-  <div className="post" key={index}>
+        <div className="post" key={index}>
 
                      <div className="head">
 
@@ -249,6 +300,9 @@ function Side() {
                         <p>anis520</p>
                         <p>Anisulhoque</p>
                        </div>
+                 </div>
+                 <div>
+                   <p className="sug">Suggestions for you</p>
                  </div>
 
 
