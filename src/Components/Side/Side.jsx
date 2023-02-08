@@ -23,7 +23,8 @@ function Side() {
   const[input,setinput]=useState({
 
        title:'',
-       photo:''
+       photo:'',
+       edit:''
 
 
 
@@ -62,6 +63,23 @@ const handleinput=(e)=>{
 
 const handlesubmit=(e)=>{
 
+if(input.edit){
+  e.preventDefault() 
+  axios.put(`http://localhost:5050/post/${input.edit}`,input).then(res=>{
+
+
+    postdata(res.data)
+
+
+  })
+  setadd('')
+  setinput({
+    title:'',
+    photo:''
+
+    
+  })
+}else{
   e.preventDefault() 
   axios.post('http://localhost:5050/post',input).then(res=>{
 
@@ -77,14 +95,54 @@ const handlesubmit=(e)=>{
 
     
   })
-
-
-
+}
 
 
 
 
 }
+
+
+
+
+// edite handeler
+const handledit=(e)=>{
+
+ const id=e.target.id
+ const editData= postdata.find(x => x.id == id)
+console.log(editData)
+
+  setadd('show')
+  setinput({
+
+    title:editData.title,
+    photo:editData.photo,
+    edit:id
+
+
+  })
+}
+
+// deletehandeler
+
+
+const handldelete=(e)=>{
+  const id=e.target.id
+
+  axios.delete(`http://localhost:5050/post/${id}`).then(res=>{
+
+
+    postdata(res.data)
+
+
+  })
+ 
+  setadd('5')
+
+}
+
+
+
  
   return (
     <>
@@ -118,7 +176,12 @@ const handlesubmit=(e)=>{
             <MdClose
               className="bu"
               onClick={(e) => {
-                setadd("");
+                setadd("");setinput({
+                  title:'',
+                  photo:''
+              
+                  
+                })
               }}
             ></MdClose>
           </div>
@@ -226,7 +289,15 @@ const handlesubmit=(e)=>{
                          <img src="https://powerpackelements.com/wp-content/uploads/2017/11/Team-memeber-01.png" alt="" />
                          <p className="name">anis520</p>
                          <p   
-                          className="icons"><BsThreeDots></BsThreeDots></p>
+                          className="icons"><BsThreeDots>
+                            </BsThreeDots>
+                            <ul className="ul">
+                              <li id={item.id}  onClick={handledit}>Edit</li>
+                              <li id={item.id} onClick={handldelete} >Delete</li>
+                            </ul>
+                            
+                            
+                            </p>
 
                      </div>
                      <div className="bodys">

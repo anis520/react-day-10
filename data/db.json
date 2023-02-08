@@ -1,31 +1,10 @@
 {
   "post": [
     {
-      "name": "Islam 22",
+      "title": "hello dears 520",
       "photo": "https://powerpackelements.com/wp-content/uploads/2017/11/Team-memeber-01.png",
-      "id": 11,
-      "title": "hello dears"
-    },
-    {
-      "name": "Anisul Hoque",
-      "photo": "https://freedesignfile.com/upload/2020/10/Islamic-background-design-mosque-window-with-light-shadow-vector.jpg",
-      "id": 15,
-      "title": "so nice moment"
-    },
-    {
-      "title": "inshallah one day",
-      "photo": "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8aXNsYW1pYyUyMGJhY2tncm91bmR8ZW58MHx8MHx8&w=1000&q=80",
-      "id": 22
-    },
-    {
-      "title": "happy day 🥰🥰",
-      "photo": "https://wallpapers.com/images/featured/xptqk5xw6adpezzv.jpg",
-      "id": 23
-    },
-    {
-      "title": "Nice place ",
-      "photo": "https://c1.wallpaperflare.com/preview/475/179/699/modina-love-baytullah-baitullah.jpg",
-      "id": 24
+      "edit": "11",
+      "id": 11
     }
   ]
 }
